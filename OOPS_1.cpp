@@ -117,6 +117,54 @@ public:
         this->x = val;
     }
 };
+class Spaceship
+{
+    string name;
+    int shieldStrength;
+    int numOfMissiles;
+    // int difficulty;             //0,1,2 => 0 is for easy, 1 is for medium , 2 is for tough.
+    static int difficulty;
+
+public:
+    Spaceship(string nm)
+    {
+        this->name = nm;
+    }
+    void fireMissile()
+    {
+        if (numOfMissiles > 0)
+        {
+            numOfMissiles--;
+        }
+    }
+    string getName()
+    {
+        return this->name;
+    }
+    Spaceship giveMeMyOwnReference()
+    {
+        return (*this);
+    }
+
+    // static methods to access static variables
+    // className::methodName(*args)
+    //static methods can only access static data.
+
+    static int getDifficulty()
+    {
+        return difficulty;
+    }
+    static void changeDifficulty(int newDifficulty)
+    {
+        difficulty = newDifficulty;
+    }
+};
+
+// For all the static variables we need to assign the data outside the class.
+// We need to manually assign memory to static variables.
+// even though it is private we can assign it,one time assignment.
+
+int Spaceship::difficulty = 0;
 
 int main()
 {
@@ -134,9 +182,9 @@ int main()
     // Object => Attributes/data/fields and methods/behaviours
 
     // Every object belongs to a certain type that is know as "class".
-        Mug m1("Scaler", "Water", 20, 80);
-        m1.fill(40);
-        m1.Display();
+    Mug m1("Scaler", "Water", 20, 80);
+    m1.fill(40);
+    m1.Display();
 
     // Method v/s function
 
@@ -163,19 +211,66 @@ int main()
 
     // The methods can access the data by using "this" keyword/
 
-    // Incapsulation => Binding the method with the data and by using this we can access the data not directly but by using methods.
+    // Encapsulation => Binding the method with the data and by using this we can access the data not directly but by using methods.
     // Getter and setter methods can be used
     // Incapsulation is used to connect data with the methods.
     // Abstraction:Hiding the data we do not want user to manipulate any data.
+
+    /**
+     * Advantages
+     * -maintainable
+     * -reusable
+     * -extensible
+     *
+     * Disadvantage
+     * -You have to read a lot to understand every bit of code.
+     * -Length of code is generally longer than usual.
+     * -Everything is treated as object in OOP so before applying it we need to have excellent thinking in terms of objects.
+     */
 
     Test t; // during creation constructor gets called;
     t.setX(100);
 
     // objectName.methodName(*args)
-    cout << t.getX();
+    cout << t.getX() << "\n";
 
+    /**
+     * Special Keywords
+     * this keyword
+     *
+     * this is a pointer that refers to the object itself.
+     * this->name or (*this).name
+     * -When local variables name is same as the member's name this keyword is used.
+     * -To return reference to the calling object.
+     * -Can be used for chained function calls on an object.
+     *
+     * static keyword
+     * let us say we want to have a configuration to change the toughness of the space wars game
+     * this 'difficulty' of the game is going to be the same for all the spaceships in the game.
+     * if we store it seperately in all the objects ,we will have to pay the price to maintain it consistently in all of the objects/
+     * even updation will take O(N) time complexity
+     * we will keep a single copy in the memory for all the objects of Spaceship for the difficulty variable
+     *   this is a static variable
+     *      --although it can be changed.
+     *      --it is named static because all the objects have the exact same copy (ONE COPY) of the variable.
+     *      --it is no of copied do not change as the no of object change.
+     *      --shared with all the spaceships.
+     */
 
+    Spaceship mySpaceship("Voyager1");
 
-    //Static
-    
+    cout << mySpaceship.giveMeMyOwnReference().getName() << "\n";
+    // Example of chaining method calls by this keyword
+
+    Spaceship cargoShuttle("CargoShuttle");
+    Spaceship warpCruiser("WarpCruiser");
+
+    // To access a static variable.
+    // ClassName::propertyName
+
+    cout<<Spaceship::getDifficulty()<<"\n";
+
+    Spaceship::changeDifficulty(3);
+
+    cout << Spaceship::getDifficulty() << "\n";
 }
