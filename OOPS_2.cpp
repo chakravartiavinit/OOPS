@@ -130,5 +130,24 @@ int main()
     Firefighter myFireFighter;
     myFireFighter.Display();
 
+    /**
+     * 
+     * Interfaces => Let's again take the example of the bird class .Now if we have to take kiwi or ostrich as an example which is a bird that cannot fly 
+     * then this cannot use the base class's fly() method as it cannot fly.
+     * Now to overcome this we can override the fly() method of the individual classes manually
+     * Or a better approach will be to introduce the concept of interfaces.
+     * 
+     * So what we can do is to remove the fly method from the base class and move it to a interface which will contain this fly method then 
+     * we can use this interface only when we need the fly method for a particular bird.
+     * Flying is something that can be implemented independent of the bird class as there might be some birds that doesn't want this method.
+     * Interfaces contains a list of methods any class which will implement this interface  will need to implement all the methods in this interface.
+     * We can use multiple interfaces as we want.
+     * Inheritance will give us reusability but not interfaces.
+     * 
+     * Abstraction => Data hiding.
+     * 
+     * 
+     */
+
 
 }
