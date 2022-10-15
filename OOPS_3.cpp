@@ -22,11 +22,16 @@ double add(double a, double b)
 }
 class ArrayList
 {
-private:
+    // private:    Non accessible direvtly outside the class and also not inheritable
+    //    vector<int> arr;
+
+protected: // Will be able to access it directly int he derived class through inheritances
+    // but still can't access them outside the class via the object directly.
+    // use case :to make data inheritable but still protecting from the outside world.
     vector<int> arr;
 
 public:
-    //static,overloaded constrctors.
+    // static,overloaded constrctors.
     ArrayList()
     {
         cout << "Constructor without param called\n";
@@ -47,36 +52,60 @@ public:
     }
     void add(int x)
     {
-        cout<<"Calling the normal add method\n";
+        cout << "Calling the normal add method\n";
         arr.push_back(x);
     }
     void print()
     {
-        for(auto x:arr)
+        for (auto x : arr)
         {
-            cout<<x<<" ";
+            cout << x << " ";
         }
-        cout<<"\n";
+        cout << "\n";
     }
-
 };
-//Now let's say we want to push only non-negative integers in the arr list in the class.
-class NonNegativeArrayList : public ArrayList{
-    
-public:
 
+//private is never inherited in any of the modes
+
+//in this public mode of inheritance (PUBLIC)
+//public data of base => public data of derived
+//protected data of base => protected data of derived.
+
+// protected mode of inheritance
+// public data of base => protected data of derived
+// protected data of base => protected data of derived
+
+// Now let's say we want to push only non-negative integers in the arr list in the class.
+class NonNegativeArrayList : public ArrayList
+{
+
+public:
     NonNegativeArrayList(vector<int> arr)
     {
-        cout<<"Calling the non-negative array list constructor.";
-        for(auto x:arr)
+        cout << "Calling the non-negative array list constructor.";
+        for (auto x : arr)
         {
             add(x);
         }
     }
-    //To add only non negative elements we will override the add method.
-    
-
+    // To add only non negative elements we will override the add method.
+    void add(int x); // only the declaration or signature here.
 };
+// definition outside class
+// scope resolution operator
+// in which class is my method coming
+// tell it before I tell the method name
+// returnType className::method(args)  => Syntax.
+void NonNegativeArrayList::add(int x)
+{
+    cout << "Calling the non negative array list constructor\n";
+
+    if (x >= 0)
+    {
+        arr.push_back(x);
+    }
+}
+
 int main()
 {
 
@@ -86,10 +115,10 @@ int main()
     // myArrayList.add(10);
 
     // cout<<myArrayList.size()<<"\n";
-    vector<int> temp={1,2,-5,4,10};
+    vector<int> temp = {1, 2, -5, 4, 10};
     NonNegativeArrayList myNonNegativeArrayList(temp);
 
-    cout<<myNonNegativeArrayList.size();
 
-
+    myNonNegativeArrayList.print();
+    // cout << myNonNegativeArrayList.size();
 }
