@@ -72,6 +72,11 @@ public:
     //     cout<<"Name : "<<callSign<<" ShieldStrength: "<<shieldStrength<<" FireStrength: "<<fireStrength<<"\n";
     // }
 };
+//Interface
+class Shape{
+    public:
+        virtual void getArea() = 0;
+};
 int main()
 {
 
@@ -145,6 +150,23 @@ int main()
      * Inheritance will give us reusability but not interfaces.
      * 
      * Abstraction => Data hiding.
+     * Abstract Classes or pure virtual=>
+     * Must have atleast one abstract function.Only for the purpose of inheritance.
+     * No object should be created for it.
+     * Abstract class can have non-abstract methods.
+     * 
+     * Abstract class => no objects created from it.
+     * Abstract methods.
+     * virtual void methodName() = 0;
+     * 
+     * First class => no classes inherited from it.
+     * 
+     * Use these keywords to better communicate intentions.
+     * 
+     * 
+     * 
+     * Interfaces:
+     * class with only the abstract methods,i.e. all virtual void methodname() = 0.
      * 
      * 
      */
